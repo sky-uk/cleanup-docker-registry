@@ -27,7 +27,7 @@ echo "podName=\`curl \
                 | jq \".items[].metadata.selfLink\" \
                 | grep registry | tr -d '\"' \`" >> /root/script/cron-cleanup-docker-registry-image.sh
 
-echo "sleep 2 ; if [! -z \${podName} ] ; then curl -X DELETE -H 'Content-Type: application/yaml' \
+echo "sleep 2 ; if [ ! -z \${podName} ] ; then curl -X DELETE -H 'Content-Type: application/yaml' \
 --data 'gracePeriodSeconds: 0' \"${urlApiServer}\${podName}\" -k \
 --header \"Authorization: Bearer ${TOKEN_APISERVER}\" ; fi" >> /root/script/cron-cleanup-docker-registry-image.sh
 
