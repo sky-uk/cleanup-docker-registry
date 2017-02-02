@@ -5,7 +5,7 @@ travis : docker release
 
 git_rev := $(shell git rev-parse --short HEAD)
 git_tag := $(shell git tag --points-at=$(git_rev))
-image := sky-cirrus/cleanup-docker-registry
+image := skycirrus/cleanup-docker-registry
 
 docker : build
 	@echo "== build"
@@ -20,4 +20,5 @@ else
 	@docker login -u $(DOCKER_USERNAME) -p $(DOCKER_PASSWORD)
 	docker tag $(image):latest $(image):$(git_tag)
 	docker push $(image):$(git_tag)
+	docker push $(image):latest
 endif
