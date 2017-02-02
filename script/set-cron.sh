@@ -22,16 +22,14 @@ echo "REGISTRY_DATA_DIR=${registryVolume} \
 
 
 echo "podName=\`curl \
-                -k \
+                -k --silent \
                 --header \"Authorization: Bearer ${TOKEN_APISERVER}\" ${urlApiServer}/api/v1/namespaces/${NAMESPACE}/pods \
                 | jq \".items[].metadata.selfLink\" \
-                | grep registry\`" >> /root/script/cron-cleanup-docker-registry-image.sh
+                | grep registry | tr -d '\"' \`" >> /root/script/cron-cleanup-docker-registry-image.sh
 
-echo "sleep 2 ; curl -X DELETE -H 'Content-Type: application/yaml' --data '\
-gracePeriodSeconds: 0\
-orphanDependents: false\
-' \"${urlApiServer}/api/v1/namespaces/${NAMESPACE}/pods/${podName}\" -k \
---header \"Authorization: Bearer ${TOKEN_APISERVER}\"" >> /root/script/cron-cleanup-docker-registry-image.sh
+echo "sleep 2 ; if [! -z \${podName} ] ; then curl -X DELETE -H 'Content-Type: application/yaml' \
+--data 'gracePeriodSeconds: 0' \"${urlApiServer}\${podName}\" -k \
+--header \"Authorization: Bearer ${TOKEN_APISERVER}\" ; fi" >> /root/script/cron-cleanup-docker-registry-image.sh
 
 chmod 755 /root/script/*
 
