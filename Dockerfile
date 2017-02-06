@@ -12,7 +12,7 @@ RUN curl --silent -o /usr/local/bin/delete_docker_registry_image \
 https://raw.githubusercontent.com/burnettk/delete-docker-registry-image/master/delete_docker_registry_image.py \
     && echo "$DELETE_DOCKER_FILE_DOWNLOAD_SHA256 /usr/local/bin/delete_docker_registry_image" | sha256sum -c -
 
-ENV CLEAN_OLD_VERSIONS_DOWNLOAD_SHA256 a970812a3a51e07f0d976b42372654383c256e750d8f72693857f6de98bccc03
+ENV CLEAN_OLD_VERSIONS_DOWNLOAD_SHA256 694df9f27f48393935ec30d59404f40cc3932cccbc087eb2c0d0d3cf818daca7
 RUN curl --silent -o /root/script/clean_old_versions.py \
 https://raw.githubusercontent.com/burnettk/delete-docker-registry-image/master/clean_old_versions.py \
     && echo "$CLEAN_OLD_VERSIONS_DOWNLOAD_SHA256 /root/script/clean_old_versions.py" | sha256sum -c -
