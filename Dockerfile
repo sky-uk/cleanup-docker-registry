@@ -17,6 +17,7 @@ RUN curl --silent -o /root/script/clean_old_versions.py \
 https://raw.githubusercontent.com/burnettk/delete-docker-registry-image/master/clean_old_versions.py \
     && echo "$CLEAN_OLD_VERSIONS_DOWNLOAD_SHA256 /root/script/clean_old_versions.py" | sha256sum -c -
 
+COPY script/cron-cleanup-docker-registry-image.sh /root/script/
 RUN chmod 0744 /root/script/*
 RUN chmod 0744 /usr/local/bin/*
 
