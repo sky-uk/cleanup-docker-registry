@@ -7,7 +7,7 @@ RUN mkdir /root/script
 
 COPY script/* /root/script/
 
-ENV DELETE_DOCKER_FILE_DOWNLOAD_SHA256 1b693885021dd1e903cdc504c78af5b0b73562239bca73f324aab1c4a89f796c
+ENV DELETE_DOCKER_FILE_DOWNLOAD_SHA256 a11eddc3bd272b6d14af7ed403481651b92e7d68d28e80c7ad674bc5b6d3023a
 RUN curl --silent -o /usr/local/bin/delete_docker_registry_image \
 https://raw.githubusercontent.com/burnettk/delete-docker-registry-image/master/delete_docker_registry_image.py \
     && echo "$DELETE_DOCKER_FILE_DOWNLOAD_SHA256 /usr/local/bin/delete_docker_registry_image" | sha256sum -c -
