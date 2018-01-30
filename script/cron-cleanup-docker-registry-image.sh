@@ -17,7 +17,7 @@ REGISTRY_DATA_DIR=${registryVolume} /root/script/clean_old_versions.py \
                                     --image "${patternImage}" \
                                     -l ${nbTagToKeep} \
                                     --order "${orderBeforeDeletion}" \
-                                    --registry-url ${registryUrl} > /var/log/clean-images-registry.log
+                                    --registry-url ${registryUrl}
 
 podName=$(hostname)
 
