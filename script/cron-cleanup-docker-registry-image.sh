@@ -17,14 +17,15 @@ REGISTRY_DATA_DIR=${registryVolume} /root/script/clean_old_versions.py \
                                     --image "${patternImage}" \
                                     -l ${nbTagToKeep} \
                                     --order "${orderBeforeDeletion}" \
-                                    --registry-url ${registryUrl}
+                                    --registry-url ${registryUrl} > /var/log/clean-images-registry.log
 
 podName=$(hostname)
 
+echo "DELETE pod to clean cache in memory " >> /var/log/clean-images-registry.log
 sleep 2;
 if [ ! -z ${podName} ] ; then
   curl -X DELETE -H 'Content-Type: application/yaml' \
   --data 'gracePeriodSeconds: 0' "${urlApiServer}/api/v1/namespaces/${NAMESPACE}/pods/${podName}" -k \
-  --header "Authorization: Bearer ${TOKEN_APISERVER}" > /var/log/clean-images-registry.log
+  --header "Authorization: Bearer ${TOKEN_APISERVER}" >> /var/log/clean-images-registry.log
 fi
 
